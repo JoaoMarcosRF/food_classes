@@ -19,23 +19,34 @@ class Person{
         this.weight = weight;
     }
     
-    String eat(){
+    public String eat(){
         
-        int weightGain = 0;
-        
+        double weightGain = 0;
 
         System.out.print("Insira a quantidade de alimentos que voce vai comer: ");
         int howManyTimesEat = input.nextInt();
-        input.nextLine(); //limpeza de buffer
+        input.nextLine(); //clean buffer
         
+        System.out.print("---------------------------------------------\n");
+
         for(int index = 1; index <= howManyTimesEat; index++){
-            Food newFood = new Food();
-            newFood.setFoodInfos();
-            
+
+            System.out.printf("Insira o nome do %d° alimento: ", index);
+            String foodName = input.nextLine();
+
+            System.out.printf("Insira o peso do %d° alimento: ", index);
+            double foodWeight = input.nextDouble();
+
+            input.nextLine();//clean buffer
+
+            System.out.print("---------------------------------------------\n");
+
+            Food newFood = new Food(foodName, foodWeight);
+        
             weightGain += newFood.foodWeight;
         }
 
-        return String.format("A pessoa %s terminou o jantar com %.02fkg, ou seja, teve um ganho de %.02f", name, weight + weightGain, weightGain);
+        return String.format("A pessoa %s terminou o jantar com %.02f kg, ou seja, teve um ganho de %.02f", name, (weight + weightGain), weightGain);
     }
 
     void closeInput(){
